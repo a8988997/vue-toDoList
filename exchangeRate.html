@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匯率換算</title>
+</head>
+<body>
+    <div id="app">
+        <h1>匯率換算器</h1>
+        <label for="">台幣：</label>
+        <input type="text" name="" id="" v-model="TWD" placeholder="請輸入換算金額">
+        <p>日幣：{{TWD/0.2586}}</p>
+        <p>美金：{{TWD/28.133}}</p>
+        <p>歐元：{{TWD/33.24}}</p>
+        <hr>
+        <h1>匯率換算器2 computed</h1>
+        <p>日幣：{{JP}}</p>
+        <p>美金：{{USD}}</p>
+        <p>歐元：{{EUR}}</p>
+        <hr>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                TWD:0
+            },
+            computed:{
+                JP:function(){
+                    return this.TWD / 0.2586
+                },
+                USD:function(){
+                    return this.TWD / 28.133
+                },
+                EUR:function(){
+                    return this.TWD / 33.24
+                }
+            }
+        })
+    </script>
+</body>
+</html>

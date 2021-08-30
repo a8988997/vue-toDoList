@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Last Vue.js commit</h1>
+        <!-- 非ul要跑v-for可綁定template -->
+        <template v-for="select in selects">
+            <input type="radio" 
+            :value="select" 
+            v-model="currentSelect">
+        {{select}}
+        </template>      
+        <p>vue.js/vue@{{currentSelect}}</p>
+        <ul>
+            <li v-for="record in commits">
+                <a :href="record.html_url" target="_blank" class="commit">更新記錄</a>-by 
+                <span class="author"><a :href="record.author.html_url" target="_blank">{{record.commit.author.name}}</a></span>
+                at <span class="date">{{record.commit.author.date}}</span>
+            </li>
+        </ul>
+    </div>
+   <!-- 1.從github api撈到vuejs commit有無更新記錄(commits?) -->
+   <!-- 2.sha(分支)=>master, dev -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        let apiURL = "https://api.github.com/repos/vuejs/vue/commits?per_page=3&sha=";
+        let data = new Vue({
+            el:"#app",
+            data:{
+              selects:["master","dev"], //radio切換
+              currentSelect:"master", //預設為master
+              commits:null  
+            },
+            created:function(){
+                this.selectData();
+            },
+            watch:{
+                currentSelect: "selectData"
+            },
+            methods:{
+                selectData:function(){
+                    let xhr = new XMLHttpRequest();
+                    let self = this;
+                    xhr.open('GET',apiURL+self.currentSelect);
+                    xhr.onload = function(){
+                        self.commits = JSON.parse(xhr.responseText);
+                        console.log(self.commits[0].html_url);
+                    }
+                    xhr.send();
+                }
+
+            }
+            
+        })
+    </script>
+</body>
+</html>

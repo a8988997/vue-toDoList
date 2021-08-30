@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+    <div id="app">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+        
+    </div>
+    <hr>
+    <div id="app2">
+        <my-component></my-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>   
+    // register區域
+    // new Vue({
+    //     el:"#app",
+    //     components:{
+    //         'my-component':{
+    //             template:'<div>Hello World</div>'
+    //         }
+    //     }
+    // })
+    //golbal全域
+    Vue.component('my-component',{
+        template:'<div>Hello World</div>'
+    })
+    new Vue({
+        el:"#app"
+    })
+    new Vue({
+        el:"#app2"
+    })
+
+
+    </script>
+</body>
+</html>

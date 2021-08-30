@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI計算</title>
+</head>
+<body>
+    <div id="app">
+        <h1>體脂肪比較</h1>
+        A的體脂肪：<input type="text" v-model="A"><br>
+        B的體脂肪：<input type="text" v-model="B"><br>
+        <hr>
+        <ul>
+            <li>誰的體脂比較重？{{whoHeavey}}</li>
+            <li>A與國人平均比較？{{whoHeaveyA}}</li>
+            <li>B與國人平均比較？{{whoHeaveyB}}</li>
+        </ul>
+       
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                A:0,
+                B:0,
+                BMI:20
+            },
+            computed:{
+                whoHeavey:function(){
+                    if(this.A > this.B){
+                        return "A比較重"
+                    }else if(this.A < this.B){
+                        return "B比較重"
+                    }else{
+                        return "一樣重"
+                    }
+                },
+                whoHeaveyA:function(){
+                    if(this.A > this.BMI){
+                        return "A高於平均值,多了"+(this.A-this.BMI);
+                    }else if(this.A < this.BMI){
+                        return "A低於平均值,少了"+(this.BMI-this.A);
+                    }else{
+                        return "A等同於平均值";
+                    }
+                },
+                whoHeaveyB:function(){
+                    if(this.B > this.BMI){
+                        return "B高於平均值,多了"+(this.B-this.BMI);
+                    }else if(this.B < this.BMI){
+                        return "B低於平均值,少了"+(this.BMI-this.B);
+                    }else{
+                        return "B等同於平均值";
+                    }
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
